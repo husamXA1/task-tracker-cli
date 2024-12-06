@@ -1,9 +1,19 @@
-import sys
+import sys, json
 
 if len(sys.argv) < 2:
     print("Invalid Input!")
     print("Usage: task-tracker [COMMAND] [ARGUMENTS]")
     sys.exit(1)
+
+# Load data
+try:
+    file = open("data.json", "r")
+    data = json.load(file)
+    latest_id = data["latest_id"]
+    tasks = data["tasks"]
+except FileNotFoundError:
+    tasks = []
+    latest_id = 0
 
 match sys.argv[1]:
     case "add":
