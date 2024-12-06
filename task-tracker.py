@@ -15,6 +15,7 @@ except FileNotFoundError:
     tasks = []
     latest_id = 0
 
+# Handling different operations
 match sys.argv[1]:
     case "add":
         if len(sys.argv) < 3:
@@ -40,3 +41,10 @@ match sys.argv[1]:
         print("listing tasks")
     case _:
         print("Unknown command!")
+
+# Saving the new data
+file = open("data.json", "w")
+json.dump({
+    "latest_id": latest_id,
+    "tasks": tasks
+}, file, indent=4)
