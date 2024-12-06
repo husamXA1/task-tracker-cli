@@ -1,4 +1,4 @@
-import sys, json
+import sys, json, time
 
 if len(sys.argv) < 2:
     print("Invalid Input!")
@@ -17,7 +17,17 @@ except FileNotFoundError:
 
 match sys.argv[1]:
     case "add":
-        print("Adding a task")
+        if len(sys.argv) < 3:
+            print("Usage: task-tracker add [DESCRIPTION]")
+            sys.exit(2)
+        latest_id += 1
+        tasks.append({
+            "id": latest_id,
+            "description": sys.argv[2],
+            "status": "todo",
+            "createdAt": time.time(),
+            "modifiedAt": time.time()
+        })
     case "update":
         print("updating a task")
     case "delete":
