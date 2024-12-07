@@ -102,7 +102,12 @@ match sys.argv[1]:
         if not updated:
             print(f"ID {task_id} doesn't exist!")
     case "list":
-        print("listing tasks")
+        print("Tasks list:")
+        print("ID".center(5), "|", "Description".center(33), "|", "status".center(12))
+        print("-" * 56)
+        for task in tasks:
+            if len(sys.argv) < 3 or task["status"] == sys.argv[2]:
+                print(f"{task['id']}".rjust(5), "|", task["description"].ljust(33), "|", task["status"].center(12))
     case _:
         print("Unknown command!")
 
