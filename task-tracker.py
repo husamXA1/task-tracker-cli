@@ -79,8 +79,8 @@ match sys.argv[1]:
         updated = False
         for task in tasks:
             if task["id"] == task_id:
-                task["status"] = "in progress"
-                print(f"Updated task (ID {task['id']}): '{task['description']}' to in progress.")
+                task["status"] = "in-progress"
+                print(f"Updated task (ID {task['id']}): '{task['description']}' to in-progress.")
                 updated = True
         if not updated:
             print(f"ID {task_id} doesn't exist!")
