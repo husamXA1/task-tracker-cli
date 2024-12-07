@@ -68,7 +68,22 @@ match sys.argv[1]:
         if not deleted:
             print(f"ID {task_id} doesn't exist!")
     case "mark-in-progress":
-        print("marking in progress")
+        if len(sys.argv) < 3:
+            print("Usage: task-tracker mark-in-progress [TASK_ID]")
+            sys.exit(3)
+        try:
+            task_id = int(sys.argv[2])
+        except ValueError:
+            print("The task id must be numeric!")
+            sys.exit(4)
+        updated = False
+        for task in tasks:
+            if task["id"] == task_id:
+                task["status"] = "in progress"
+                print(f"Updated task (ID {task['id']}): '{task['description']}' to in progress.")
+                updated = True
+        if not updated:
+            print(f"ID {task_id} doesn't exist!")
     case "mark-done":
         print("marking done")
     case "list":
