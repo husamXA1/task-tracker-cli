@@ -30,7 +30,25 @@ match sys.argv[1]:
             "modifiedAt": time.time()
         })
     case "update":
-        print("updating a task")
+        if len(sys.argv) < 4:
+            print("Usage: task-tracker update [TASK_ID] [NEW_DESCRIPTION]")
+            sys.exit(3)
+        try:
+            task_id = int(sys.argv[2])
+        except ValueError:
+            print("The task id must be numeric!")
+            sys.exit(4)
+        new_description = sys.argv[3]
+        updated = False
+        for task in tasks:
+            if task["id"] == task_id:
+                task["description"] = new_description
+                task["modifiedAt"] = time.time()
+                updated = True
+        if not updated:
+            print(f"ID {task_id} doesn't exist!")
+        else:
+            print(f"Task {task_id} updated to {new_description}")
     case "delete":
         print("deleting a task")
     case "mark-in-progress":
