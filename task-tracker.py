@@ -29,6 +29,7 @@ match sys.argv[1]:
             "createdAt": time.time(),
             "modifiedAt": time.time()
         })
+        print(f"Added task '{sys.argv[2]}' with ID {latest_id}")
     case "update":
         if len(sys.argv) < 4:
             print("Usage: task-tracker update [TASK_ID] [NEW_DESCRIPTION]")
