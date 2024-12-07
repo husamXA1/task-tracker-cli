@@ -51,7 +51,22 @@ match sys.argv[1]:
         else:
             print(f"Task {task_id} updated to {new_description}")
     case "delete":
-        print("deleting a task")
+        if len(sys.argv) < 3:
+            print("Usage: task-tracker delete [TASK_ID]")
+            sys.exit(3)
+        try:
+            task_id = int(sys.argv[2])
+        except ValueError:
+            print("The task id must be numeric!")
+            sys.exit(4)
+        deleted = False
+        for index, task in enumerate(tasks):
+            if task["id"] == task_id:
+                tasks.pop(index)
+                print(f"Task {task_id}: '{task['description']}' deleted successfully")
+                deleted = True
+        if not deleted:
+            print(f"ID {task_id} doesn't exist!")
     case "mark-in-progress":
         print("marking in progress")
     case "mark-done":
